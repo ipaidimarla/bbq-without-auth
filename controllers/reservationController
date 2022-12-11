@@ -2,7 +2,7 @@ const Reservation = require("../models/reservationModel");
 
 //get all reservations
 const getAllReservations = async (req, res) => {
-  const reservations = await Reservation.find({});
+  const reservations = await Reservation.find({}).sort({ date: 1 });
   console.log(reservations);
   res.status(200).json(reservations);
 };
