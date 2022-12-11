@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 const reservationsRoutes = require("./routes/reservations");
-const userRoutes = require("./routes/user");
+const Reservation = require("./models/reservationModel");
 
 app.use(cors());
 
@@ -18,13 +18,13 @@ app.use((req, res, next) => {
 
 // routes
 app.use("/api/reservations", reservationsRoutes);
-app.use("/api/user", userRoutes);
 
 // connect to db
 
 mongoose
-  .connect(process.env.DEV_URI, { useNewUrlParser: true })
+  .connect(process.env.PROD_URI, { useNewUrlParser: true })
   .then(() => {
+    console.log(process.env.PROD_URI);
     app.listen(process.env.PORT || 3001, () => {
       console.log("connected");
     });

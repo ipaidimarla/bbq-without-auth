@@ -2,7 +2,8 @@ const Reservation = require("../models/reservationModel");
 
 //get all reservations
 const getAllReservations = async (req, res) => {
-  const reservations = await Reservation.find({}).sort({ date: 1 });
+  const reservations = await Reservation.find({});
+  console.log(reservations);
   res.status(200).json(reservations);
 };
 
@@ -12,14 +13,12 @@ const getAllReservations = async (req, res) => {
 const createReservation = async (req, res) => {
   const { name, unit, date, timeFrom, timeTo } = req.body;
   try {
-    const user_id = req.user._id;
     const reservation = await Reservation.create({
       name,
       unit,
       date,
       timeFrom,
-      timeTo,
-      user_id,
+      timeTo
     });
     res.send(reservation);
   } catch (error) {
